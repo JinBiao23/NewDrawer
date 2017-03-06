@@ -1,0 +1,87 @@
+﻿@model Draw.Models.Shape
+@using Draw.Infrustracture
+@{
+    ViewBag.Title = "Home Page";
+} 
+<div class="row" id="targetId">
+    <div class="col-md-4">
+        <h2>Select panel</h2>
+        @using (Ajax.BeginForm("Draw", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "", OnSuccess = "drawShape", OnFailure = "onFailure" }))
+        {
+            <div class="row">
+                <div class="alert alert-danger" id="alertDiv" role="alert">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="ShapeName">Shape</label>
+                        @Html.DropDownListFor(m => m.ShapeName, Model.ShapeName.ToSelectList(), new { @class = "form-control shapeSelector" })
+                        @Html.ValidationMessageFor(m => m.ShapeName)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 inputGroup" id="widthInput">
+                    <div class="form-group">
+                        <label for="Width">Width</label>
+                        @Html.TextBoxFor(m => m.Width, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Width)
+                    </div>
+                </div>
+                <div class="col-md-12 inputGroup" id="heightInput">
+                    <div class="form-group">
+                        <label for="Height">Height</label>
+                        @Html.TextBoxFor(m => m.Height, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Height)
+                    </div>
+                </div>
+                <div class="col-md-12 inputGroup" id="radiusInput">
+                    <div class="form-group">
+                        <label for="Radius">Radius</label>
+                        @Html.TextBoxFor(m => m.Radius, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Radius)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 inputGroup" id="maxRadiusInput">
+                    <div class="form-group">
+                        <label for="MaxRadius">Max Radius</label>
+                        @Html.TextBoxFor(m => m.MaxRadius, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.MaxRadius)
+                    </div>
+                </div>
+                <div class="col-md-12 inputGroup" id="angleInput">
+                    <div class="form-group">
+                        <label for="Angle">Angle</label>
+                        @Html.TextBoxFor(m => m.Angle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Angle)
+                    </div>
+                </div>
+                <div class="col-md-12 inputGroup" id="sideLengthInput">
+                    <div class="form-group">
+                        <label for="AngleSideLength">Side length</label>
+                        @Html.TextBoxFor(m => m.AngleSideLength, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.AngleSideLength)
+                    </div>
+                </div>
+            </div> 
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-default">Submit</button>
+            </div>
+        }
+    </div>
+    @*<hr style="width: 100%; color: black; height: 1px; background-color:black;" />*@
+    <div class="col-md-8" id="">
+        @*@Html.HiddenFor(m => m.ShapeName)
+            @Html.HiddenFor(m => m.Width)
+            @Html.HiddenFor(m => m.Height)
+            @Html.HiddenFor(m => m.MaxRadius)
+            @Html.HiddenFor(m => m.Angle)
+            @Html.HiddenFor(m => m.Radius)
+            @Html.HiddenFor(m => m.AngleSideLength)*@
+        <canvas id="drawArea" width="600" height="600" style="background-color:#efefef;"></canvas>
+    </div>
+</div> 
